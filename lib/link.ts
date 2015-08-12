@@ -4,12 +4,32 @@ import mongoose = require("mongoose");
 
 
 export var linkSchema = new mongoose.Schema({
-    url: String,
-    slug: String,
-    adminId: String,
-    createdAt: { type: Date, default: Date.now },
-    expires: Date,
-    accessCount: { type: Number, default: 0 }
+    url: {
+        type: String,
+        required: true
+    },
+    slug: {
+        type: String,
+        required: true
+    },
+    adminId: {
+        type: String,
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    expires: {
+        type: Date,
+        required: true
+    },
+    accessCount: {
+        type: Number,
+        default: 0,
+        required: true
+    }
 });
 
 export interface Link extends mongoose.Document {
