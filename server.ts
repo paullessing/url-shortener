@@ -41,9 +41,12 @@ app.get('/:slug', (req: express.Request, res: express.Response) => {
 app.post('/create', (req: express.Request, res: express.Response) => {
     var details: Link = req.body;
 
-    linkService.create(details).then(x => {
-        console.log("Created", x);
-        res.json(x);
+    linkService.create(details).then(link => {
+        console.log("Created", link);
+        res.json(link);
+    }).catch(error => {
+        console.log("Rejected: ", error);
+        res.send("ERROR"); // TODO
     });
 });
 
