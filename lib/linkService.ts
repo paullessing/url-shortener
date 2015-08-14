@@ -6,13 +6,14 @@ import moment = require("moment");
 import Link = linkModel.Link;
 
 import repository = require('./linkRepository');
+import LinkDetails = linkModel.LinkDetails;
 
 function generateAdminId(): string {
     var time = '' + new Date().getTime();
     return 'a' + time.substring(time.length - 7); // TODO
 }
 
-export var create = function(link: Link): Promise<Link> {
+export var create = function(link: LinkDetails): Promise<Link> {
     return Promise.resolve()
         .then(() => {
             if (link.slug) {

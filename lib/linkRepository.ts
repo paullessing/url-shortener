@@ -4,6 +4,7 @@ import Promise = require('bluebird');
 import linkModel = require("./link");
 import moment = require("moment");
 import Link = linkModel.Link;
+import LinkDetails = linkModel.LinkDetails;
 import repository = linkModel.repository;
 
 // TODO move out into SlugGenerator class
@@ -48,7 +49,7 @@ export var isSlugUnused = function(slug: string): Promise<boolean> {
     });
 };
 
-export var save = function(link: Link): Promise<Link> {
+export var save = function(link: LinkDetails): Promise<Link> {
     return Promise.resolve(repository.create(link));
 };
 

@@ -18,7 +18,7 @@ export var linkSchema = new mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now,
+        'default': Date.now,
         required: true
     },
     expires: {
@@ -27,18 +27,25 @@ export var linkSchema = new mongoose.Schema({
     },
     accessCount: {
         type: Number,
-        default: 0,
+        'default': 0,
         required: true
     }
 });
 
-export interface Link extends mongoose.Document {
+export interface LinkDetails {
+    url: string;
+    slug?: string;
+    adminId?: string,
+    expires?: Date
+}
+
+export interface Link extends LinkDetails, mongoose.Document {
     url: string;
     slug: string;
     adminId: string;
     createdAt: Date;
     expires: Date;
     accessCount: number;
-};
+}
 
 export var repository = mongoose.model<Link>("Link", linkSchema);
