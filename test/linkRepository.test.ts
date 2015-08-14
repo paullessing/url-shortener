@@ -117,6 +117,8 @@ describe('LinkRepository', function() {
         });
     });
 
+    // TODO create unit tests for generateNewSlug once we have moved the generator logic into a separate component
+
     function createLink(slug: string): Promise<Link> {
         return Promise.resolve(repository.create({
             url: 'foo',
