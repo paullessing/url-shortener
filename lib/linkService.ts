@@ -45,7 +45,7 @@ function ensureValidSlug(slug: string): Promise<string> {
 
 export var get = function(slug: string, andIncrement?: boolean) {
     return repository.fetchBySlug(slug).then(link => {
-        if (andIncrement) {
+        if (andIncrement && link) {
             link.accessCount++;
             link.save();
         }
