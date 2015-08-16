@@ -16,16 +16,13 @@ import repository = linkModel.repository;
 describe("Link", function() {
     describe("#save()", function() {
         before(function() {
-            console.log("Link: attempting connect");
             return Promise.resolve(mongoose.connect('mongodb://localhost:27017/putit_at_test'));
         });
         afterEach(function() {
             return Promise.resolve(repository.remove({}));
         });
         after(function() {
-            return Promise.resolve(mongoose.connection.close()).then(function() {
-                console.log("Closed connection in Link");
-            });
+            return Promise.resolve(mongoose.connection.close());
         });
 
         it('should enforce requirements', function() {
