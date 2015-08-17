@@ -17,7 +17,7 @@ export function generateAdminId(link: LinkDetails): Promise<string> {
 }
 
 export function getExpiry(expiry: Date): Promise<Date> {
-    if (!expiry || expiry.getTime() < new Date().getTime()) {
+    if (!expiry || !moment(expiry).isAfter(moment())) {
         expiry = moment().add(7, 'days').toDate(); // TODO default expiry should be configurable
     }
     return Promise.resolve(expiry);
@@ -33,10 +33,10 @@ export function validateOrGenerateSlug(slug: string): Promise<string> {
 
 function ensureValidSlug(slug: string): Promise<string> {
     return repository.isSlugUnused(slug).then(isValid => {
-        if (!isValid) {
-            throw new Error("Duplicate slug");
-        } else {
+        if (isValid) {
             return slug;
+        } else {
+            throw new Error("Duplicate slug");
         }
     })
 }
