@@ -6,14 +6,18 @@ import moment = require("moment");
 import Link = linkModel.Link;
 import LinkDetails = linkModel.LinkDetails;
 import repository = require('./linkRepository');
+import crypto = require('crypto');
 
 /**
  * Utility object for populating LinkDetails objects with the required fields for persisting.
  */
 export function generateAdminId(link: LinkDetails): Promise<string> {
-    var time = '' + new Date().getTime();
-    var adminId = 'a' + time.substring(time.length - 7);
-    return Promise.resolve(adminId);
+    var md5 = crypto.createHash('md5');
+    var hash: string = md5.update(link.url)
+        .update('link.slug')
+        .update(Math.random().toString())
+        .digest('hex');
+    return Promise.resolve(hash.substr(3,12));
 }
 
 export function getExpiry(expiry: Date): Promise<Date> {

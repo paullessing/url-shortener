@@ -42,7 +42,7 @@ describe('LinkDetailsFetcher', function() {
         mockery.registerMock('moment', stubMoment);
         mockery.registerAllowable('./link');
         mockery.registerAllowable('bluebird');
-        //mockery.registerAllowable('moment');
+        mockery.registerAllowable('crypto');
         mockery.registerAllowable('../lib/linkDetailsFetcher'); // Under test
 
         linkDetailsFetcher = require('../lib/linkDetailsFetcher');
