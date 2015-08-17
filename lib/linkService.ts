@@ -25,10 +25,13 @@ export var create = function(link: LinkDetails): Promise<Link> {
 
 export var get = function(slug: string, andIncrement?: boolean) {
     return repository.fetchBySlug(slug).then(link => {
-        if (andIncrement && link) {
+        if (!link) {
+            return Promise.reject(new Error("No such URL"));
+        }
+        if (andIncrement) {
             link.accessCount++;
             link.save();
         }
-        return link; //Don't wait for persist, it can happen asynchronously
+        return Promise.resolve(link); //Don't wait for persist, it can happen asynchronously
     });
 };

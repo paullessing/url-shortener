@@ -83,12 +83,14 @@ describe("LinkService", function() {
                 assert.strictEqual(link, resultLink);
             });
         });
-        it('should return null when the repository returns a null link', function() {
+        it('should reject the promise when the repository returns a null link', function() {
             var slug = 'mySlug';
             linkRepository.fetchBySlug.withArgs(slug).returns(Promise.resolve(null));
 
-            return linkService.get(slug).then(resultLink => {
-                assert.isNull(resultLink);
+            return linkService.get(slug).then(() => {
+                assert.fail('Should not succeed');
+            }).catch(err => {
+                assert.isNotNull(err);
             });
         });
         it('should not do anything to the link when no argument is passed for andIncrement', function() {
@@ -123,8 +125,10 @@ describe("LinkService", function() {
             var slug = 'mySlug';
             linkRepository.fetchBySlug.withArgs(slug).returns(Promise.resolve(null));
 
-            return linkService.get(slug, true).then(resultLink => {
-                assert.isNull(resultLink);
+            return linkService.get(slug, true).then(() => {
+                assert.fail('Should not succeed');
+            }).catch(err => {
+                assert.isNotNull(err);
             });
         });
     });

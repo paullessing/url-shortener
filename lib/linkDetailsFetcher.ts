@@ -8,6 +8,11 @@ import LinkDetails = linkModel.LinkDetails;
 import repository = require('./linkRepository');
 import crypto = require('crypto');
 
+var invalidSlugs = [
+    'resources',
+    'admin'
+]; // TODO quantify somehow
+
 /**
  * Utility object for populating LinkDetails objects with the required fields for persisting.
  */
@@ -36,11 +41,19 @@ export function validateOrGenerateSlug(slug: string): Promise<string> {
 }
 
 function ensureValidSlug(slug: string): Promise<string> {
-    return repository.isSlugUnused(slug).then(isValid => {
-        if (isValid) {
-            return slug;
+    return Promise.all(invalidSlugs.map(invalidSlug => {
+        if (slug.toLowerCase() === invalidSlug) {
+            return Promise.reject(new Error('Invalid Slug'));
         } else {
-            throw new Error("Duplicate slug");
+            return Promise.resolve();
         }
-    })
+    })).then(() => {
+        return repository.isSlugUnused(slug).then(isValid => {
+            if (isValid) {
+                return slug;
+            } else {
+                throw new Error("Duplicate slug");
+            }
+        })
+    });
 }
