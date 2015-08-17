@@ -1,0 +1,22 @@
+{
+  "name": "putit.at",
+  "version": "0.0.0",
+  "homepage": "https://github.com/paullessing/url-shortener",
+  "authors": [
+    "paul.lessing <paul@paullessing.com>"
+  ],
+  "description": "URL Management system",
+  "main": "public/resources/js/app.js",
+  "moduleType": "es6",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "typings"
+  ],
+  "dependencies": {
+    "angularjs": "~1.4.4",
+    "jquery": "~2.1.4"
+  }
+}

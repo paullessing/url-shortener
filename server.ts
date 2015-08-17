@@ -25,10 +25,6 @@ app.use(bodyParser.json());                                     // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride('X-HTTP-Method-Override'));
 
-app.get('/', (req: express.Request, res: express.Response) => {
-    res.send("API calls only so far");
-});
-
 app.get('/:slug', (req: express.Request, res: express.Response) => {
     linkService.get(req.params.slug, true).then(link => {
         res.redirect(link.url, 302);
