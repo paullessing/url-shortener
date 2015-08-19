@@ -1,4 +1,4 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
 
 import Promise = require('bluebird');
 import mongoose = require('mongoose');
@@ -9,7 +9,7 @@ sinon.assert.expose(chai.assert, { prefix: "" });
 
 var assert = chai.assert;
 
-import linkModel = require('../lib/link');
+import linkModel = require('../../lib/system/link');
 import Link = linkModel.Link;
 import repository = linkModel.repository;
 

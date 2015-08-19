@@ -1,10 +1,10 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
 
 import Promise = require('bluebird');
 
-import linkModel = require("../lib/link");
+import linkModel = require("../../lib/system/link");
 import Link = linkModel.Link;
-import LinkDetails = linkModel.LinkDetails;
+import LinkDetails = require('../../lib/shared/linkDetails');
 
 var mockery = require('mockery');
 
@@ -45,9 +45,9 @@ describe("LinkService", function() {
         mockery.registerMock('./linkDetailsFetcher', linkDetailsFetcher);
         mockery.registerAllowable('./link');
         mockery.registerAllowable('bluebird');
-        mockery.registerAllowable('../lib/linkService'); // Under test
+        mockery.registerAllowable('../../lib/system/linkService'); // Under test
 
-        linkService = require('../lib/linkService');
+        linkService = require('../../lib/system/linkService');
     });
     beforeEach(() => {
         linkRepository.save.reset();

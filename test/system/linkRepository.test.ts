@@ -1,9 +1,9 @@
 import mongoose = require('mongoose');
 import Promise = require('bluebird');
 
-import linkModel = require("../lib/link");
+import LinkDetails = require('../../lib/shared/linkDetails');
+import linkModel = require("../../lib/system/link");
 import Link = linkModel.Link;
-import LinkDetails = linkModel.LinkDetails;
 import repository = linkModel.repository;
 
 import chai = require('chai');
@@ -11,7 +11,7 @@ import sinon = require('sinon');
 
 sinon.assert.expose(chai.assert, { prefix: "" });
 
-import linkRepository = require('../lib/linkRepository');
+import linkRepository = require('../../lib/system/linkRepository');
 
 var assert = chai.assert;
 

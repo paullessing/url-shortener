@@ -1,12 +1,12 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
 
 import Promise = require('bluebird');
 import moment = require('moment');
 import Moment = moment.Moment;
 
-import linkModel = require("../lib/link");
+import linkModel = require("../../lib/system/link");
 import Link = linkModel.Link;
-import LinkDetails = linkModel.LinkDetails;
+import LinkDetails = require('../../lib/shared/linkDetails');
 
 import chai = require('chai');
 import sinon = require('sinon');
@@ -40,12 +40,12 @@ describe('LinkDetailsFetcher', function() {
         mockery.enable();
         mockery.registerMock('./linkRepository', linkRepository);
         mockery.registerMock('moment', stubMoment);
-        mockery.registerAllowable('./link');
+        mockery.registerAllowable('../shared/link');
         mockery.registerAllowable('bluebird');
         mockery.registerAllowable('crypto');
-        mockery.registerAllowable('../lib/linkDetailsFetcher'); // Under test
+        mockery.registerAllowable('../../lib/system/linkDetailsFetcher'); // Under test
 
-        linkDetailsFetcher = require('../lib/linkDetailsFetcher');
+        linkDetailsFetcher = require('../../lib/system/linkDetailsFetcher');
     });
     beforeEach(() => {
         linkRepository.isSlugUnused.reset();

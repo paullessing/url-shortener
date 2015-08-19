@@ -1,15 +1,15 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
 
 import Promise = require("bluebird");
 import linkModel = require("./link");
 import moment = require("moment");
+import LinkDetails = require('../shared/linkDetails');
 import Link = linkModel.Link;
-import LinkDetails = linkModel.LinkDetails;
 import repository = require('./linkRepository');
 import crypto = require('crypto');
 
 var invalidSlugs = [
-    'resources',
+    'res',
     'admin'
 ]; // TODO quantify somehow
 

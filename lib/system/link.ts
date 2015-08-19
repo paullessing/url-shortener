@@ -1,9 +1,9 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
+///<reference path='../shared/_all.ts' />
 
 import mongoose = require("mongoose");
 
-
-export var linkSchema = new mongoose.Schema({
+var linkSchema = new mongoose.Schema({
     url: {
         type: String,
         required: true
@@ -32,14 +32,7 @@ export var linkSchema = new mongoose.Schema({
     }
 });
 
-export interface LinkDetails {
-    url: string;
-    slug?: string;
-    adminId?: string,
-    expires?: Date
-}
-
-export interface Link extends LinkDetails, mongoose.Document {
+export interface Link extends putitAt.LinkDetails, mongoose.Document {
     url: string;
     slug: string;
     adminId: string;
@@ -49,3 +42,4 @@ export interface Link extends LinkDetails, mongoose.Document {
 }
 
 export var repository = mongoose.model<Link>("Link", linkSchema);
+

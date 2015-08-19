@@ -46,6 +46,12 @@
     },
     "sinon/sinon.d.ts": {
       "commit": "338f9db37074d197764e95a487ddb865c5f2d73c"
+    },
+    "angularjs/angular.d.ts": {
+      "commit": "efa0c1196d7280640e624ac1e7fa604502e7bd63"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "efa0c1196d7280640e624ac1e7fa604502e7bd63"
     }
   }
 }

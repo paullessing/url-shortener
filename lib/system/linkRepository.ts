@@ -1,10 +1,10 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
 
 import Promise = require('bluebird');
 import linkModel = require("./link");
 import moment = require("moment");
+import LinkDetails = require('../shared/linkDetails');
 import Link = linkModel.Link;
-import LinkDetails = linkModel.LinkDetails;
 import repository = linkModel.repository;
 
 // TODO move out into SlugGenerator class

@@ -1,4 +1,4 @@
-///<reference path='../typings/tsd.d.ts' />
+///<reference path='../../typings/tsd.d.ts' />
 
 import Promise = require("bluebird");
 import linkModel = require("./link");
@@ -6,7 +6,7 @@ import moment = require("moment");
 import Link = linkModel.Link;
 
 import repository = require('./linkRepository');
-import LinkDetails = linkModel.LinkDetails;
+import LinkDetails = require('../shared/linkDetails');
 
 import linkDetailsFetcher = require('./linkDetailsFetcher');
 
