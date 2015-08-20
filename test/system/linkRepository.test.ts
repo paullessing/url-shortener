@@ -1,7 +1,7 @@
 import mongoose = require('mongoose');
 import Promise = require('bluebird');
 
-import LinkDetails = require('../../lib/shared/linkDetails');
+import LinkDetails = putitAt.LinkDetails;
 import linkModel = require("../../lib/system/link");
 import Link = linkModel.Link;
 import repository = linkModel.repository;

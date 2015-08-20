@@ -6,7 +6,7 @@ import Moment = moment.Moment;
 
 import linkModel = require("../../lib/system/link");
 import Link = linkModel.Link;
-import LinkDetails = require('../../lib/shared/linkDetails');
+import LinkDetails = putitAt.LinkDetails;
 
 import chai = require('chai');
 import sinon = require('sinon');

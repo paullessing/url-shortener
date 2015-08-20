@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <title>Put It.At</title>
     <script src="/res/js/bower_components/angularjs/angular.js"></script>
+    <script src="/res/js/bower_components/angular-material/angular-material.js"></script>
+    <script src="/res/js/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/res/js/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/res/js/bower_components/jquery/dist/jquery.js"></script>
+    <link href="/res/js/bower_components/angular-material/angular-material.css" rel="stylesheet" />
 </head>
 <body ng-app="putitAt">
     <h1>Put it.At</h1>
-    <putit-at-form></putit-at-form>
+    <div ng-controller="MainCtrl as ctrl">
+        <putit-at-success link="ctrl.lastLink"></putit-at-success>
+        <putit-at-form create="ctrl.submit(link)"></putit-at-form>
+    </div>
 
     <script src="/res/js/app.bundle.js"></script>
 </body>

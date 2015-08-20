@@ -1,11 +1,12 @@
 ///<reference path='_all.ts' />
 ///<reference path='components/form/formDirective.ts' />
-
-//var form = require('./components/form/component');
+///<reference path='components/success/successDirective.ts' />
 
 namespace putitAt {
-    var app = angular.module('putitAt', []);
+    var app = angular.module('putitAt', ['ngMaterial']);
 
     app.directive('putitAtForm', form.formDirective)
-        .service('FormService', form.FormService);
+        .directive('putitAtSuccess', success.successDirective)
+        .controller('MainCtrl', MainCtrl)
+        .service('LinkService', LinkService);
 }

@@ -1,10 +1,11 @@
 /// <reference path='../_all.ts' />
-/// <reference path='./formService.ts' />
 
 namespace putitAt.form {
     export function formDirective(): angular.IDirective {
         return {
-            scope: {},
+            scope: {
+                create: '&'
+            },
             templateUrl: 'res/components/form/form.html',
             replace: true,
             controller: FormCtrl,
@@ -12,12 +13,16 @@ namespace putitAt.form {
         }
     }
 
+    interface FormScope extends angular.IScope {
+        create: (LinkDetails) => Promise<LinkDetails>;
+    }
+
     export class FormCtrl {
         public static $inject = [
-            'FormService'
+            '$scope'
         ];
 
-        constructor(private formService: FormService) {
+        constructor(private $scope: FormScope) {
             this.reset();
         }
 
@@ -32,8 +37,7 @@ namespace putitAt.form {
         }
 
         public submit() {
-            console.log("Form data: ", this.formData);
-            this.formService.create(this.formData);
+            this.$scope.create({link: this.formData});
             this.reset();
         }
     }

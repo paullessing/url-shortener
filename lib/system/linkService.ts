@@ -6,7 +6,7 @@ import moment = require("moment");
 import Link = linkModel.Link;
 
 import repository = require('./linkRepository');
-import LinkDetails = require('../shared/linkDetails');
+import LinkDetails = putitAt.LinkDetails;
 
 import linkDetailsFetcher = require('./linkDetailsFetcher');
 

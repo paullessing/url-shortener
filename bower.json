@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "angularjs": "~1.4.4",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "angular-material": "~0.10.1"
   }
 }

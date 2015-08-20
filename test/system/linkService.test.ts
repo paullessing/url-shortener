@@ -4,7 +4,7 @@ import Promise = require('bluebird');
 
 import linkModel = require("../../lib/system/link");
 import Link = linkModel.Link;
-import LinkDetails = require('../../lib/shared/linkDetails');
+import LinkDetails = putitAt.LinkDetails;
 
 var mockery = require('mockery');
 

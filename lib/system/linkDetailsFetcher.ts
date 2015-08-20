@@ -3,12 +3,13 @@
 import Promise = require("bluebird");
 import linkModel = require("./link");
 import moment = require("moment");
-import LinkDetails = require('../shared/linkDetails');
+import LinkDetails = putitAt.LinkDetails;
 import Link = linkModel.Link;
 import repository = require('./linkRepository');
 import crypto = require('crypto');
 
 var invalidSlugs = [
+    '404',
     'res',
     'admin'
 ]; // TODO quantify somehow

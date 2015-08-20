@@ -1,6 +1,17 @@
-<form ng-submit="ctrl.submit()">
-    <input type="url" ng-model="ctrl.formData.url" placeholder="http://mysuperlong.url/withLotsOfText" /><br />
-    <input type="text" ng-model="ctrl.formData.slug" placeholder="Slug (Optional)" /><br />
-    <input type="datetime" ng-model="ctrl.formData.expiry" placeholder="Expiry" /><br />
-    <input type="submit" value="Create link!" />
+<form ng-submit="ctrl.submit()" novalidate>
+    <md-content>
+        <md-input-container>
+            <label>Address</label>
+            <input type="url" ng-model="ctrl.formData.url" placeholder="http://mysuperlong.url" />
+        </md-input-container>
+        <md-input-container>
+            <label>Slug (Optional)</label>
+            <input type="text" ng-model="ctrl.formData.slug" />
+        </md-input-container>
+        <md-input-container>
+            <label>Expiry</label>
+            <input type="datetime" ng-model="ctrl.formData.expiry" />
+        </md-input-container>
+        <md-button class="md-raised md-primary" type="submit">Create Link</md-button>
+    </md-content>
 </form>

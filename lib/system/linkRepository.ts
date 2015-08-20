@@ -3,7 +3,7 @@
 import Promise = require('bluebird');
 import linkModel = require("./link");
 import moment = require("moment");
-import LinkDetails = require('../shared/linkDetails');
+import LinkDetails = putitAt.LinkDetails;
 import Link = linkModel.Link;
 import repository = linkModel.repository;
 
