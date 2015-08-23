@@ -6,7 +6,7 @@ import Moment = moment.Moment;
 
 import linkModel = require("../../lib/system/link");
 import Link = linkModel.Link;
-import LinkDetails = putitAt.LinkDetails;
+import LinkDetails = require('../../lib/shared/linkDetails');
 
 import chai = require('chai');
 import sinon = require('sinon');
@@ -27,13 +27,8 @@ describe('LinkDetailsFetcher', function() {
 
     var now = 100;
     var nowMoment: Moment;
-    var expectedExpiry: Moment;
     var stubMoment = function(expiry?: Date): Moment {
-        if (!expiry) {
-            return nowMoment;
-        } else {
-            return expectedExpiry;
-        }
+        return nowMoment;
     };
 
     before(function() {
@@ -76,29 +71,25 @@ describe('LinkDetailsFetcher', function() {
             });
         });
 
-        it('should set expiry to a future date when it is in the past', function() {
-            var expiryDate = new Date(now - 1);
-            expectedExpiry = moment(expiryDate);
+        it('should set expiry to a future date when expiry seconds are negative', function() {
+            var expirySeconds = -1;
 
-            return linkDetailsFetcher.getExpiry(expiryDate).then(function(expiry: Date) {
-                assert.isNotNull(expiry, "expiry not null");
+            return linkDetailsFetcher.getExpiry(expirySeconds).then(function(expiry: Date) {
                 assert.ok(expiry.getTime() > now, 'Date should be in the future');
             });
         });
         it('should set expiry to a future date when it is exactly now', function() {
-            var expiryDate = new Date(now);
-            expectedExpiry = moment(expiryDate);
+            var expirySeconds = 0;
 
-            return linkDetailsFetcher.getExpiry(expiryDate).then(function(expiry: Date) {
+            return linkDetailsFetcher.getExpiry(expirySeconds).then(function(expiry: Date) {
                 assert.ok(expiry.getTime() > now, 'Date should be in the future');
             });
         });
         it('should use existing expiry when that is in the future', function() {
-            var expiryDate = new Date(now + 1);
-            expectedExpiry = moment(expiryDate);
+            var expirySeconds = 1;
 
-            return linkDetailsFetcher.getExpiry(expiryDate).then(function(expiry: Date) {
-                assert.strictEqual(expiry.getTime(), expiryDate.getTime());
+            return linkDetailsFetcher.getExpiry(expirySeconds).then(function(expiry: Date) {
+                assert.strictEqual(expiry.getTime(), now + expirySeconds * 1000);
             });
         });
     });

@@ -26,11 +26,14 @@ export function generateAdminId(link: LinkDetails): Promise<string> {
     return Promise.resolve(hash.substr(3,12));
 }
 
-export function getExpiry(expiry: Date): Promise<Date> {
-    if (!expiry || !moment(expiry).isAfter(moment())) {
-        expiry = moment().add(7, 'days').toDate(); // TODO default expiry should be configurable
+export function getExpiry(expirySeconds: number): Promise<Date> {
+    var expiry;
+    if (!expirySeconds || expirySeconds <= 0) {
+        expiry = moment().add(7, 'days'); // TODO default expiry should be configurable
+    } else {
+        expiry = moment().add(expirySeconds, 'seconds');
     }
-    return Promise.resolve(expiry);
+    return Promise.resolve(expiry.toDate());
 }
 
 export function validateOrGenerateSlug(slug: string): Promise<string> {

@@ -15,6 +15,7 @@ var app               = express();                  // create our app w/ express
 import linkModel = require("./lib/system/link");
 import Link = linkModel.Link;
 import LinkDetails = putitAt.LinkDetails;
+import LinkResult = putitAt.LinkResult;
 import linkService = require('./lib/system/linkService');
 
 mongoose.connect('mongodb://localhost:27017/putit_at');
