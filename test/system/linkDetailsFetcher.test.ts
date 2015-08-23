@@ -46,7 +46,6 @@ describe('LinkDetailsFetcher', function() {
         linkRepository.isSlugUnused.reset();
         linkRepository.generateNewSlug.reset();
         nowMoment = moment(now);
-        expectedExpiry = null;
     });
 
     after(function() {

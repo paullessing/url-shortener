@@ -1,7 +1,8 @@
 ///<reference path='../../typings/tsd.d.ts' />
 ///<reference path='../shared/_all.ts' />
 
-import mongoose = require("mongoose");
+import * as mongoose from 'mongoose';
+import { LinkDetails } from '../shared/linkDetails';
 
 var linkSchema = new mongoose.Schema({
     url: {
@@ -32,7 +33,7 @@ var linkSchema = new mongoose.Schema({
     }
 });
 
-export interface Link extends putitAt.LinkDetails, mongoose.Document {
+export interface Link extends LinkDetails, mongoose.Document {
     url: string;
     slug: string;
     adminId: string;

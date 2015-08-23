@@ -12,11 +12,9 @@ import bodyParser     = require('body-parser');     // pull information from HTM
 import methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var app               = express();                  // create our app w/ express
 
-import linkModel = require("./lib/system/link");
-import Link = linkModel.Link;
-import LinkDetails = putitAt.LinkDetails;
-import LinkResult = putitAt.LinkResult;
-import linkService = require('./lib/system/linkService');
+import { Link } from './lib/system/link';
+import { LinkDetails, LinkResult } from './lib/shared/linkDetails';
+import * as linkService from './lib/system/linkService';
 
 mongoose.connect('mongodb://localhost:27017/putit_at');
 

@@ -1,10 +1,8 @@
 import mongoose = require('mongoose');
 import Promise = require('bluebird');
 
-import LinkDetails = putitAt.LinkDetails;
-import linkModel = require("../../lib/system/link");
-import Link = linkModel.Link;
-import repository = linkModel.repository;
+import { LinkDetails } from '../../lib/shared/linkDetails';
+import { Link, repository } from '../../lib/system/link';
 
 import chai = require('chai');
 import sinon = require('sinon');

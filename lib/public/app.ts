@@ -2,11 +2,14 @@
 ///<reference path='components/form/formDirective.ts' />
 ///<reference path='components/success/successDirective.ts' />
 
-namespace putitAt {
-    var app = angular.module('putitAt', ['ngMaterial']);
+import { formDirective } from 'components/form/formDirective';
+import { successDirective } from 'components/success/successDirective';
+import { MainCtrl } from 'components/main/mainController';
+import { LinkService } from 'util/linkService';
 
-    app.directive('putitAtForm', form.formDirective)
-        .directive('putitAtSuccess', success.successDirective)
-        .controller('MainCtrl', MainCtrl)
-        .service('LinkService', LinkService);
-}
+var app = angular.module('putitAt', ['ngMaterial']);
+
+app.directive('putitAtForm', formDirective)
+    .directive('putitAtSuccess', successDirective)
+    .controller('MainCtrl', MainCtrl)
+    .service('LinkService', LinkService);

@@ -3,9 +3,8 @@
 import Promise = require('bluebird');
 import linkModel = require("./link");
 import moment = require("moment");
-import LinkDetails = putitAt.LinkDetails;
-import Link = linkModel.Link;
-import repository = linkModel.repository;
+import { Link, repository } from './link';
+import { LinkDetails } from '../shared/linkDetails';
 
 // TODO move out into SlugGenerator class
 function generateSlug(): string {

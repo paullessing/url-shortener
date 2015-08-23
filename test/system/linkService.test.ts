@@ -2,9 +2,9 @@
 
 import Promise = require('bluebird');
 
-import linkModel = require("../../lib/system/link");
-import Link = linkModel.Link;
-import LinkDetails = putitAt.LinkDetails;
+import { LinkDetails } from '../../lib/shared/linkDetails';
+import { Link } from '../../lib/system/link';
+import * as moment from 'moment';
 
 var mockery = require('mockery');
 
@@ -39,10 +39,17 @@ describe("LinkService", function() {
     }
     var link;
 
+    var now = moment(113);
+
+    function mockMoment() {
+        return now;
+    }
+
     before(function() {
         mockery.enable();
         mockery.registerMock('./linkRepository', linkRepository);
         mockery.registerMock('./linkDetailsFetcher', linkDetailsFetcher);
+        mockery.registerMock('moment', mockMoment);
         mockery.registerAllowable('./link');
         mockery.registerAllowable('bluebird');
         mockery.registerAllowable('../../lib/system/linkService'); // Under test
@@ -150,7 +157,7 @@ describe("LinkService", function() {
             })
         });
         it('should use the values returned by the fetcher', function() {
-            var oldExpiry = new Date(100);
+            var oldExpiry = 57;
             var oldSlug = 'barfoo';
 
             var newAdminId = 'abcdef';
@@ -160,7 +167,7 @@ describe("LinkService", function() {
             var linkDetails: LinkDetails = {
                 url: 'http://foo.bar',
                 slug: oldSlug,
-                expires: oldExpiry
+                expiresSeconds: oldExpiry
             };
 
             linkDetailsFetcher.generateAdminId.withArgs(linkDetails).returns(Promise.resolve(newAdminId));
@@ -171,7 +178,7 @@ describe("LinkService", function() {
 
             return linkService.create(linkDetails)
                 .then(() => {
-                    var linkDetailsUsed: LinkDetails = linkRepository.save.firstCall.args[0];
+                    var linkDetailsUsed: Link = linkRepository.save.firstCall.args[0];
                     assert.strictEqual(linkDetailsUsed.adminId, newAdminId);
                     assert.strictEqual(linkDetailsUsed.expires, newExpiry);
                     assert.strictEqual(linkDetailsUsed.slug, newSlug);
@@ -187,12 +194,28 @@ describe("LinkService", function() {
 
             fetcherReturnsDefaults();
 
-            linkRepository.save.withArgs(linkDetails).returns(Promise.resolve(link));
+            linkRepository.save.returns(Promise.resolve(link));
 
             return linkService.create(linkDetails)
                 .then(() => {
-                    var linkDetailsUsed: LinkDetails = linkRepository.save.firstCall.args[0];
+                    var linkDetailsUsed: Link = linkRepository.save.firstCall.args[0];
                     assert.strictEqual(linkDetailsUsed.url, url);
+                });
+        });
+        it('should set the created At value to now', function() {
+            var linkDetails: LinkDetails = {
+                url: 'url',
+                slug: 'slug'
+            };
+
+            fetcherReturnsDefaults();
+
+            linkRepository.save.returns(Promise.resolve(link));
+
+            return linkService.create(linkDetails)
+                .then(() => {
+                    var linkUsed: Link = linkRepository.save.firstCall.args[0];
+                    assert.equal(linkUsed.createdAt.getTime(), now.valueOf());
                 });
         });
         it('should return the Link created by the repository', function() {
@@ -203,7 +226,7 @@ describe("LinkService", function() {
 
             fetcherReturnsDefaults();
 
-            linkRepository.save.withArgs(linkDetails).returns(Promise.resolve(link));
+            linkRepository.save.returns(Promise.resolve(link));
 
             return linkService.create(linkDetails)
                 .then(linkCreated => {

@@ -3,9 +3,9 @@
 import Promise = require("bluebird");
 import linkModel = require("./link");
 import moment = require("moment");
-import LinkDetails = putitAt.LinkDetails;
-import Link = linkModel.Link;
-import repository = require('./linkRepository');
+import { LinkDetails } from '../shared/linkDetails';
+import { Link } from './link';
+import * as linkRepository from './linkRepository';
 import crypto = require('crypto');
 
 var invalidSlugs = [
@@ -40,7 +40,7 @@ export function validateOrGenerateSlug(slug: string): Promise<string> {
     if (slug) {
         return ensureValidSlug(slug);
     } else {
-        return repository.generateNewSlug();
+        return linkRepository.generateNewSlug();
     }
 }
 
@@ -52,7 +52,7 @@ function ensureValidSlug(slug: string): Promise<string> {
             return Promise.resolve();
         }
     })).then(() => {
-        return repository.isSlugUnused(slug).then(isValid => {
+        return linkRepository.isSlugUnused(slug).then(isValid => {
             if (isValid) {
                 return slug;
             } else {

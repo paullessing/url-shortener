@@ -1,8 +1,9 @@
 ///<reference path='../../typings/tsd.d.ts' />
 
 
-import Promise = require("bluebird");
-import linkModel = require("./link");
+import * as Promise from 'bluebird';
+import { Link } from './link';
+import { LinkDetails } from '../shared/linkDetails';
 import moment = require("moment");
 
 import repository = require('./linkRepository');
