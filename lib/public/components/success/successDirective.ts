@@ -14,7 +14,7 @@ export function successDirective(): angular.IDirective {
     }
 }
 
-interface SuccessScope extends angular.IScope {
+export interface SuccessScope extends angular.IScope {
     link?: LinkDetails
 }
 

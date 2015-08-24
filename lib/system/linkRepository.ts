@@ -12,7 +12,7 @@ function generateSlug(): string {
     return 's' + time.substring(time.length - 5); // TODO
 }
 
-function attemptNewSlug(resolve: (string) => void, reject: (any) => void, count?: number) {
+function attemptNewSlug(resolve: (slug: string) => void, reject: (error: Error) => void, count?: number) {
     count = count || 0;
     if (count > 10) {
         reject(new Error("Tried too many times to generate a slug"));
@@ -38,7 +38,7 @@ export var generateNewSlug = function(): Promise<string> {
 };
 
 export var isSlugUnused = function(slug: string): Promise<boolean> {
-    return new Promise<boolean>(function(resolve: (boolean) => void, reject) {
+    return new Promise<boolean>(function(resolve: (isUnused: boolean) => void, reject: (err: Error) => void) {
         repository.where('slug', slug).count(function (err, count) {
             if (err) {
                 reject(err);
@@ -53,8 +53,8 @@ export var save = function(link: LinkDetails): Promise<Link> {
 };
 
 export var fetchBySlug = function(slug: string): Promise<Link> {
-    return new Promise<Link>((resolve: (Link) => void, reject) => {
-        repository.where('slug', slug).findOne((err, link: Link) => {
+    return new Promise<Link>((resolve: (link: Link) => void, reject: (err: Error) => void) => {
+        repository.where('slug', slug).findOne((err: Error, link: Link) => {
             if (err) {
                 reject(err);
             } else {

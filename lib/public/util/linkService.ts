@@ -3,7 +3,7 @@
 import { LinkDetails } from '../../shared/linkDetails';
 
 export interface LinkObserver {
-    onCreate: (LinkDetails) => void
+    onCreate(link: LinkDetails): void
 };
 
 export class LinkService {
@@ -31,7 +31,7 @@ export class LinkService {
         this.observers.push(observer);
     }
 
-    private notifyObservers(link) {
+    private notifyObservers(link: LinkDetails) {
         this.observers.forEach(observer => observer.onCreate(link));
     }
 }

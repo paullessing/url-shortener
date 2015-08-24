@@ -27,7 +27,7 @@ export function generateAdminId(link: LinkDetails): Promise<string> {
 }
 
 export function getExpiry(expirySeconds: number): Promise<Date> {
-    var expiry;
+    var expiry: moment.Moment;
     if (!expirySeconds || expirySeconds <= 0) {
         expiry = moment().add(7, 'days'); // TODO default expiry should be configurable
     } else {

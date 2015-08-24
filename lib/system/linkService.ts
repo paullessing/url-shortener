@@ -1,6 +1,5 @@
 ///<reference path='../../typings/tsd.d.ts' />
 
-
 import * as Promise from 'bluebird';
 import { Link } from './link';
 import { LinkDetails } from '../shared/linkDetails';

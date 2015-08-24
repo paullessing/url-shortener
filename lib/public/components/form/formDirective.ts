@@ -14,8 +14,8 @@ export function formDirective(): angular.IDirective {
     }
 }
 
-interface FormScope extends angular.IScope {
-    create: (LinkDetails) => Promise<LinkDetails>;
+export interface FormScope extends angular.IScope {
+    create(details: { link: LinkDetails }): Promise<LinkDetails>;
 }
 
 export class FormCtrl {
