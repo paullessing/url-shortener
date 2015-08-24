@@ -1,4 +1,4 @@
-///<reference path='../../typings/tsd.d.ts' />
+///<reference path='_all.ts' />
 
 import * as Promise from 'bluebird';
 import { Link } from './link';

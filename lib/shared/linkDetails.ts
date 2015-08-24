@@ -1,4 +1,4 @@
-///<reference path='../../typings/tsd.d.ts' />
+///<reference path='_all.ts' />
 
 export interface LinkDetails {
     url: string;

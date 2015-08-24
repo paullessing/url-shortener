@@ -1,5 +1,4 @@
-///<reference path='../../typings/tsd.d.ts' />
-///<reference path='../shared/_all.ts' />
+///<reference path='_all.ts' />
 
 import * as mongoose from 'mongoose';
 import { LinkDetails } from '../shared/linkDetails';

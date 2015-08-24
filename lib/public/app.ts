@@ -1,6 +1,4 @@
 ///<reference path='_all.ts' />
-///<reference path='components/form/formDirective.ts' />
-///<reference path='components/success/successDirective.ts' />
 
 // Remove before prod release
 //require('jquery');

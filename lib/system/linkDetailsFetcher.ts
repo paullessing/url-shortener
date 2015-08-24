@@ -1,4 +1,4 @@
-///<reference path='../../typings/tsd.d.ts' />
+///<reference path='_all.ts' />
 
 import Promise = require("bluebird");
 import linkModel = require("./link");
