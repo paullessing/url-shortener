@@ -1,0 +1,10 @@
+.container {
+	background-color: #40c0ff;
+	color: white;
+	width: 100%;
+	min-height: 800px;
+	padding: 100px 40px;
+	@include display-flex;
+	@include flex-direction(column);
+	@include align-items(center);
+}

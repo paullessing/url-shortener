@@ -5,7 +5,7 @@ import { LinkDetails } from '../../../shared/linkDetails';
 export function successDirective(): angular.IDirective {
     return {
         scope: {
-            link: '='
+            links: '='
         },
         templateUrl: 'res/components/success/success.html',
         replace: true,
@@ -15,7 +15,7 @@ export function successDirective(): angular.IDirective {
 }
 
 export interface SuccessScope extends angular.IScope {
-    link?: LinkDetails
+    links?: LinkDetails[]
 }
 
 export class SuccessCtrl {
@@ -27,8 +27,8 @@ export class SuccessCtrl {
     constructor(private $scope: SuccessScope) {
     }
 
-    public getLinkUrl() {
-        return 'http://putit.at/' + (this.$scope.link  ? this.$scope.link.slug : '404');
+    public getLinkUrl(link: LinkDetails) {
+        return 'http://putit.at/' + link.slug;
     }
 }
 

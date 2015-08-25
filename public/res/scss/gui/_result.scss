@@ -1,0 +1,19 @@
+.result-list {
+	width: 100%;
+}
+
+.result {
+	width: 100%;
+	margin-bottom: 20px;
+
+	background-color: #fffbe8;
+	color: #222;
+	@include box-shadow(2px 2px 2px rgba(0,0,0,0.2));
+	border-radius: 3px;
+
+	padding: 16px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

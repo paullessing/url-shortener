@@ -1,0 +1,77 @@
+.linkForm {
+	display: block;
+	max-width: 900px;
+	width: 100%;
+
+	margin-bottom: 50px;
+}
+.linkForm-row {
+	display: block;
+	width: 100%;
+	margin-bottom: 20px;
+
+	@include display-flex;
+	@include justify-content(flex-start);
+}
+
+%linkForm-input {
+	height: 40px;
+	padding: 5px 10px;
+	border: none;
+	border-radius: 3px;
+	outline: none;
+	@include box-shadow(2px 2px 2px rgba(0,0,0,0.3));
+}
+
+.linkform-inputBlock {
+	display: inline-block;
+	margin-left: 20px;
+	padding-left: 10px;
+
+	&:first-child {
+		margin-left: 0;
+	}
+}
+
+.linkForm-label {
+	margin-right: 10px;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+.linkForm-link {
+	@extend %linkForm-input;
+	@include flex-grow(1);
+}
+
+.linkForm-slug {
+	@extend %linkForm-input;
+	@include flex-grow(1);
+	max-width: 300px;
+}
+
+.linkForm-expiry {
+	@extend %linkForm-input;
+	background-color: white;
+}
+
+.linkForm-submit {
+	border: none;
+	border-radius: 3px;
+	@include box-shadow(2px 2px 2px rgba(0,0,0,0.3));
+	outline: none;
+	background-color: #d138e8;
+	color: white;
+	font-weight: $font-weight-bold;
+	font-family: $font-merriweather;
+	font-size: 20px;
+	padding: 0 20px;
+	font-style: italic;
+	margin-left: 20px;
+
+	&:active {
+		position: relative;
+		top: 2px;
+		@include box-shadow(none);
+	}
+}

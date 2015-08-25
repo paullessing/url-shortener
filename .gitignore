@@ -31,3 +31,6 @@ typings
 .idea
 *.js
 *.js.map
+
+.sass-cache/*
+public/res/css/*.css

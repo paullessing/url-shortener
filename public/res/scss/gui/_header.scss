@@ -1,0 +1,20 @@
+.header {
+	color: white;
+	text-align: center;
+	margin-bottom: 80px;
+
+	font-family: $font-merriweather;
+	font-weight: $font-weight-extraBold;
+	font-style: italic;
+
+}
+
+.header-title {
+	font-size: 100px;
+	text-shadow: 8px 7px rgba(0,0,0,0.3);
+	margin-bottom: 10px;
+}
+.header-subtitle {
+	font-size: 20px;
+	text-shadow: 4px 3px rgba(0,0,0,0.3);
+}

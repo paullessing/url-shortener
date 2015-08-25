@@ -1,5 +1,9 @@
-<div>
-    <h2 ng-show="link">
-        Success! Link {{ ctrl.getLinkUrl() }} was created!
-    </h2>
+<div class="result-list">
+    <div class="result" ng-repeat="link in links.slice().reverse()">
+        <h2 class="result-header">Your Link:</h2>
+        <p class="result-text">
+            <a ng-href="{{ ctrl.getLinkUrl(link) }}">{{ ctrl.getLinkUrl(link) }}</a>
+        </p>
+        <p class="result-text">This link expires on {{ link.expires | date:'dd/MM/yyyy HH:mm'}}.</p>
+    </div>
 </div>

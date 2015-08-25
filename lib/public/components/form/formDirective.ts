@@ -29,11 +29,37 @@ export class FormCtrl {
 
     public formData = <LinkDetails> null;
 
+    public expiryOptions = [{
+        value: 600,
+        name: '10 minutes'
+    },{
+        value: 3600,
+        name: '1 hour'
+    },{
+        value: 3600 * 12,
+        name: '12 hours'
+    },{
+        value: 86400,
+        name: '1 day'
+    },{
+        value: 86400 * 7,
+        name: '1 week'
+    },{
+        value: 86400 * 30,
+        name: '1 month'
+    },{
+        value: 86400 * 30 * 6,
+        name: '6 months'
+    },{
+        value: 86400 * 365,
+        name: '1 year'
+    }];
+
     private reset() {
         this.formData = {
             url: '',
             slug: '',
-            expiry: ''
+            expiresSeconds: this.expiryOptions[0].value
         };
     }
 

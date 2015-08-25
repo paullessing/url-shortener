@@ -22,20 +22,14 @@ export class MainCtrl {
         this.self = this;
     }
 
-    public lastLink: LinkDetails = null;
+    public createdLinks: LinkDetails[] = [];
     public foo = { bar: 'baz' };
     public self: MainCtrl;
 
     public submit(linkDetails: LinkDetails) {
-        // TODO when this is passed as a callback "this" is lost
-        console.log("MainCtrl: Submitting", this);
-
         this.linkService.create(linkDetails).then(newLink => {
             this.$scope.$apply(() => {
-                console.log("Updating lastLink:", this);
-                console.log("Is it me?", this.self === this, this.self, this);
-                this.lastLink = newLink;
-                this.foo = { bar: 'bear' };
+                this.createdLinks.push(newLink);
             })
         });
     }

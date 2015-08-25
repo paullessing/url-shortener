@@ -1,17 +1,22 @@
-<form ng-submit="ctrl.submit()" novalidate>
-    <md-content>
-        <md-input-container>
-            <label>Address</label>
-            <input type="url" ng-model="ctrl.formData.url" placeholder="http://mysuperlong.url" />
-        </md-input-container>
-        <md-input-container>
-            <label>Slug (Optional)</label>
-            <input type="text" ng-model="ctrl.formData.slug" />
-        </md-input-container>
-        <md-input-container>
-            <label>Expiry</label>
-            <input type="datetime" ng-model="ctrl.formData.expiry" />
-        </md-input-container>
-        <md-button class="md-raised md-primary" type="submit">Create Link</md-button>
-    </md-content>
+<form ng-submit="ctrl.submit()" novalidate class="linkForm">
+    <div class="linkForm-row">
+        <input type="url" class="linkForm-link" ng-model="ctrl.formData.url" placeholder="Paste your long URL here" />
+        <button type="submit" class="linkForm-submit">Create Link</button>
+    </div>
+    <div class="linkForm-row">
+        <div class="linkform-inputBlock">
+            <label class="linkForm-label" for="slug">
+                Slug (Optional)
+            </label>
+            <input type="text" id="slug" ng-model="ctrl.formData.slug" class="linkForm-slug" />
+        </div>
+        <div class="linkform-inputBlock">
+            <label class="linkForm-label">
+                Expiry
+            </label>
+            <select ng-model="ctrl.formData.expiresSeconds" class="linkForm-expiry"
+                    ng-options="option.value as option.name for option in ctrl.expiryOptions">
+            </select>
+        </div>
+    </div>
 </form>

@@ -9,12 +9,16 @@
     <script src="/res/js/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/res/js/bower_components/jquery/dist/jquery.js"></script>
     <link href="/res/js/bower_components/angular-material/angular-material.css" rel="stylesheet" />
+    <link href="/res/css/style.css" rel="stylesheet" />
 </head>
-<body ng-app="putitAt">
-    <h1>Put it.At</h1>
-    <div ng-controller="MainCtrl as ctrl">
-        <putit-at-success link="ctrl.lastLink"></putit-at-success>
+<body ng-app="putitAt" class="body">
+    <div class="container" ng-controller="MainCtrl as ctrl">
+        <div class="header">
+            <h1 class="header-title">Put it .At...</h1>
+            <p class="header-subtitle">Make long links memorable</p>
+        </div>
         <putit-at-form create="ctrl.submit(link)"></putit-at-form>
+        <putit-at-success links="ctrl.createdLinks"></putit-at-success>
     </div>
 
     <script src="/res/js/application.js"></script>
