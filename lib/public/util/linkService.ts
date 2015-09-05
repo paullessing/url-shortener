@@ -17,14 +17,25 @@ export class LinkService {
     private observers: LinkObserver[] = [];
 
     public create(details: LinkDetails): Promise<LinkDetails> {
-        return Promise.resolve(
-            this.$http.post('/create', details).then(result => {
-                var createdLink = <LinkDetails> result.data;
+        return Promise.resolve(this.$http.post<LinkDetails>('/create', details)
+            .then((result: any) => {
+                console.log("Got a response", result);
+                if (!result.data.success) {
+                    console.log("No success!");
+                    return Promise.reject(result.error);
+                }
+                var createdLink = <LinkDetails> result.data.link;
                 console.log('Result', createdLink);
                 this.notifyObservers(createdLink);
                 return createdLink;
+            }, httpErr => {
+                console.warn("Http Error: ", httpErr);
+                return Promise.reject("An error has occurred. Please try again.");
             })
-        );
+            .catch(err => {
+                console.error("Failed to retrieve LinkDetails", err);
+                return Promise.reject(err);
+            }));
     }
 
     public addObserver(observer: LinkObserver) {

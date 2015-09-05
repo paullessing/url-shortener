@@ -55,7 +55,7 @@ describe('LinkDetailsFetcher', function() {
 
     describe('#generateAdminId()', function() {
         it('should generate a nonempty String ID', function() {
-            return linkDetailsFetcher.generateAdminId({url: 'url', slug: 'slug'}).then(adminId => {
+            return linkDetailsFetcher.generateAdminId('url', 'slug').then(adminId => {
                 assert.typeOf(adminId, 'string');
                 assert.isNotNull(adminId);
                 assert.ok(adminId.length > 0);
@@ -125,4 +125,46 @@ describe('LinkDetailsFetcher', function() {
             });
         });
     });
+
+    describe('#ensureValidUrl()', function() {
+        it('should reject when URL is null', function() {
+            return expectError(linkDetailsFetcher.ensureValidUrl(null));
+        });
+        it('should reject when URL is empty', function() {
+            return expectError(linkDetailsFetcher.ensureValidUrl(''));
+        });
+        it('should add prefix when URL has no protocol', function() {
+            return linkDetailsFetcher.ensureValidUrl('foo.bar').then(url => {
+                assert.strictEqual('http://foo.bar', url);
+            });
+        });
+        it('should reject URL with protocol if it is invalid', function() {
+            return expectError(linkDetailsFetcher.ensureValidUrl('http://not-a-url'));
+        });
+        it('should reject URL without protocol if it is invalid', function() {
+            return expectError(linkDetailsFetcher.ensureValidUrl('not-a-url'));
+        });
+        it('should accept https, http or ftp protocols', function() {
+            return Promise.all([
+                linkDetailsFetcher.ensureValidUrl('https://foo.bar'),
+                linkDetailsFetcher.ensureValidUrl('http://foo.bar'),
+                linkDetailsFetcher.ensureValidUrl('ftp://foo.bar')
+            ]);
+        });
+        it('should not accept any other protocols', function() {
+            return Promise.all([
+                expectError(linkDetailsFetcher.ensureValidUrl('steam://123456')),
+                expectError(linkDetailsFetcher.ensureValidUrl('magnet:?xt=urn:btih:c12fe1c06bba254a9dabc519b335aa7c1367a88a&dn')), // from wikipedia
+                expectError(linkDetailsFetcher.ensureValidUrl('callto://1234567890'))
+            ]);
+        });
+    });
+
+    function expectError(promise: Promise<any>) {
+        return promise.then(() => {
+            throw new Error('Unexpected success');
+        }, err => {
+            // Expected
+        });
+    }
 });

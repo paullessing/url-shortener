@@ -39,10 +39,10 @@ app.post('/create', (req: express.Request, res: express.Response) => {
 
     linkService.create(details).then(link => {
         console.log("Created", link);
-        res.json(link);
+        res.json({ success: true, link: link });
     }).catch(error => {
         console.log("Rejected: ", error);
-        res.send("ERROR"); // TODO
+        res.send({ success: false, error: error.message }); // TODO
     });
 });
 

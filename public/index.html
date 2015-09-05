@@ -12,13 +12,13 @@
     <link href="/res/css/style.css" rel="stylesheet" />
 </head>
 <body ng-app="putitAt" class="body">
-    <div class="container" ng-controller="MainCtrl as ctrl">
-        <div class="header">
-            <h1 class="header-title">Put it .At...</h1>
-            <p class="header-subtitle">Make long links memorable</p>
+    <div class="c-container" ng-controller="MainCtrl as ctrl">
+        <div class="c-header">
+            <h1 class="c-header__title">Put it .At...</h1>
+            <p class="c-header__subtitle">Make long links memorable</p>
         </div>
-        <putit-at-form create="ctrl.submit(link)"></putit-at-form>
-        <putit-at-success links="ctrl.createdLinks"></putit-at-success>
+        <putit-at-form create="ctrl.submit(link)" ng-hide="ctrl.lastCreatedLink"></putit-at-form>
+        <putit-at-success link="ctrl.lastCreatedLink" dismiss="ctrl.dismiss()" ng-if="ctrl.lastCreatedLink"></putit-at-success>
     </div>
 
     <script src="/res/js/application.js"></script>

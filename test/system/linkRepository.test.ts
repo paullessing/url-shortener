@@ -81,6 +81,7 @@ describe('LinkRepository', function() {
                 .then(function(repoLink) {
                     linkRepository.fetchBySlug(slug)
                         .then((link: Link) => {
+                            assert.isNotNull(link);
                             assert.ok(link.equals(repoLink));
                         });
                 })

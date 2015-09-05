@@ -1,11 +1,11 @@
-.linkForm {
+.c-linkForm {
 	display: block;
 	max-width: 900px;
 	width: 100%;
 
 	margin-bottom: 50px;
 }
-.linkForm-row {
+.c-linkForm__row {
 	display: block;
 	width: 100%;
 	margin-bottom: 20px;
@@ -14,7 +14,7 @@
 	@include justify-content(flex-start);
 }
 
-%linkForm-input {
+%c-linkForm__input {
 	height: 40px;
 	padding: 5px 10px;
 	border: none;
@@ -23,7 +23,7 @@
 	@include box-shadow(2px 2px 2px rgba(0,0,0,0.3));
 }
 
-.linkform-inputBlock {
+.c-linkForm__inputBlock {
 	display: inline-block;
 	margin-left: 20px;
 	padding-left: 10px;
@@ -33,29 +33,29 @@
 	}
 }
 
-.linkForm-label {
+.c-linkForm__label {
 	margin-right: 10px;
 	margin-bottom: 5px;
 	display: inline-block;
 }
 
-.linkForm-link {
-	@extend %linkForm-input;
+.c-linkForm__link {
+	@extend %c-linkForm__input;
 	@include flex-grow(1);
 }
 
-.linkForm-slug {
-	@extend %linkForm-input;
+.c-linkForm__slug {
+	@extend %c-linkForm__input;
 	@include flex-grow(1);
 	max-width: 300px;
 }
 
-.linkForm-expiry {
-	@extend %linkForm-input;
+.c-linkForm__expiry {
+	@extend %c-linkForm__input;
 	background-color: white;
 }
 
-.linkForm-submit {
+.c-linkForm__submit {
 	border: none;
 	border-radius: 3px;
 	@include box-shadow(2px 2px 2px rgba(0,0,0,0.3));

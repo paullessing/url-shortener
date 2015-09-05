@@ -1,20 +1,20 @@
-<form ng-submit="ctrl.submit()" novalidate class="linkForm">
-    <div class="linkForm-row">
-        <input type="url" class="linkForm-link" ng-model="ctrl.formData.url" placeholder="Paste your long URL here" />
-        <button type="submit" class="linkForm-submit">Create Link</button>
+<form ng-submit="ctrl.submit()" novalidate class="c-linkForm">
+    <div class="c-linkForm__row">
+        <input type="text" class="c-linkForm__link" ng-model="ctrl.formData.url" placeholder="Paste your long URL here" />
+        <button type="submit" class="c-linkForm__submit">Create Link</button>
     </div>
-    <div class="linkForm-row">
-        <div class="linkform-inputBlock">
-            <label class="linkForm-label" for="slug">
+    <div class="c-linkForm__row">
+        <div class="c-linkForm__inputBlock">
+            <label class="c-linkForm__label" for="slug">
                 Slug (Optional)
             </label>
-            <input type="text" id="slug" ng-model="ctrl.formData.slug" class="linkForm-slug" />
+            <input type="text" id="slug" ng-model="ctrl.formData.slug" class="c-linkForm__slug" />
         </div>
-        <div class="linkform-inputBlock">
-            <label class="linkForm-label">
+        <div class="c-linkForm__inputBlock">
+            <label class="c-linkForm__label">
                 Expiry
             </label>
-            <select ng-model="ctrl.formData.expiresSeconds" class="linkForm-expiry"
+            <select ng-model="ctrl.formData.expiresSeconds" class="c-linkForm__expiry"
                     ng-options="option.value as option.name for option in ctrl.expiryOptions">
             </select>
         </div>

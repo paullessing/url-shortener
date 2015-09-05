@@ -64,8 +64,11 @@ export class FormCtrl {
     }
 
     public submit() {
-        this.$scope.create({link: this.formData});
-        this.reset();
+        this.$scope.create({link: this.formData}).then(result => {
+            this.reset();
+        }).catch(err => {
+            // Show error in frontend;
+        });
     }
 }
 

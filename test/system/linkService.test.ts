@@ -16,6 +16,7 @@ var assert = chai.assert;
 describe("LinkService", function() {
     var linkService;
 
+    var url = 'some.url';
     var adminId = 'a12345';
     var expiry = new Date(151);
     var slug = 'slugfest';
@@ -29,13 +30,15 @@ describe("LinkService", function() {
     var linkDetailsFetcher = {
         generateAdminId: sinon.stub(),
         validateOrGenerateSlug: sinon.stub(),
-        getExpiry: sinon.stub()
+        getExpiry: sinon.stub(),
+        ensureValidUrl: sinon.stub()
     };
 
     function fetcherReturnsDefaults() {
         linkDetailsFetcher.generateAdminId.returns(Promise.resolve(adminId));
         linkDetailsFetcher.getExpiry.returns(Promise.resolve(expiry));
         linkDetailsFetcher.validateOrGenerateSlug.returns(Promise.resolve(slug));
+        linkDetailsFetcher.ensureValidUrl.returns(Promise.resolve(url));
     }
     var link;
 
@@ -64,6 +67,7 @@ describe("LinkService", function() {
         linkDetailsFetcher.generateAdminId.reset();
         linkDetailsFetcher.getExpiry.reset();
         linkDetailsFetcher.validateOrGenerateSlug.reset();
+        linkDetailsFetcher.ensureValidUrl = sinon.stub(); // Hard reset since otherwise withArgs inherits
 
         link = {
             _id: null,
@@ -154,54 +158,59 @@ describe("LinkService", function() {
                 assert.fail("Should not pass");
             }).catch(function(errorThrown: Error) {
                 assert.strictEqual(error, errorThrown);
-            })
+            });
         });
         it('should use the values returned by the fetcher', function() {
-            var oldExpiry = 57;
-            var oldSlug = 'barfoo';
+            var oldUrl = 'foo.bar';
+            var newUrl = 'http://foo.bar';
 
-            var newAdminId = 'abcdef';
+            var oldExpiry = 57;
             var newExpiry = new Date(111);
+
+            var oldSlug = 'barfoo';
             var newSlug = 'foobar';
 
+            var newAdminId = 'abcdef';
+
             var linkDetails: LinkDetails = {
-                url: 'http://foo.bar',
+                url: oldUrl,
                 slug: oldSlug,
                 expiresSeconds: oldExpiry
             };
 
-            linkDetailsFetcher.generateAdminId.withArgs(linkDetails).returns(Promise.resolve(newAdminId));
+            linkDetailsFetcher.ensureValidUrl.withArgs(oldUrl).returns(Promise.resolve(newUrl));
             linkDetailsFetcher.getExpiry.withArgs(oldExpiry).returns(Promise.resolve(newExpiry));
             linkDetailsFetcher.validateOrGenerateSlug.withArgs(oldSlug).returns(Promise.resolve(newSlug));
+            linkDetailsFetcher.generateAdminId.withArgs(newUrl, newSlug).returns(Promise.resolve(newAdminId));
 
             linkRepository.save.withArgs(linkDetails).returns(Promise.resolve(link));
 
             return linkService.create(linkDetails)
                 .then(() => {
                     var linkDetailsUsed: Link = linkRepository.save.firstCall.args[0];
+                    assert.strictEqual(linkDetailsUsed.url, newUrl);
                     assert.strictEqual(linkDetailsUsed.adminId, newAdminId);
                     assert.strictEqual(linkDetailsUsed.expires, newExpiry);
                     assert.strictEqual(linkDetailsUsed.slug, newSlug);
                 });
         });
-        it('should not modify the URL before passing to the repository', function() {
-            var url = 'strict.url';
+        it('should fail gracefully when the URL cannot be validated', function() {
+            var error = new Error('Invalid URL :(');
+            linkDetailsFetcher.ensureValidUrl.withArgs(url).returns(Promise.reject(error));
+
             var linkDetails: LinkDetails = {
                 url: url,
-                slug: 'slug',
-                expires: new Date(0)
+                expiresSeconds: 10
             };
 
-            fetcherReturnsDefaults();
-
-            linkRepository.save.returns(Promise.resolve(link));
-
-            return linkService.create(linkDetails)
-                .then(() => {
-                    var linkDetailsUsed: Link = linkRepository.save.firstCall.args[0];
-                    assert.strictEqual(linkDetailsUsed.url, url);
-                });
+            return linkService.create(linkDetails).then(url => {
+                assert.fail('Unexpected success');
+            }, err => {
+                assert.strictEqual(error, err);
+            });
         });
+
+
         it('should set the created At value to now', function() {
             var linkDetails: LinkDetails = {
                 url: 'url',
