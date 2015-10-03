@@ -1,10 +1,23 @@
 .c-container {
+	$footerHeight: 50px;
 	background-color: #40c0ff;
 	color: white;
 	width: 100%;
-	min-height: 800px;
-	padding: 100px 40px;
+	min-height: 100%;
+	padding: 100px 40px (100px + $footerHeight);
 	@include display-flex;
 	@include flex-direction(column);
 	@include align-items(center);
+
+	position: relative;
+
+	&:after {
+		position: absolute;
+		content: '';
+		display: block;
+		background-color: white;
+		height: $footerHeight;
+		bottom: 0;
+		@include fill-parent(horizontal);
+	}
 }

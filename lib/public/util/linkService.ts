@@ -1,6 +1,6 @@
 ///<reference path='../components/_all.ts' />
 
-import { LinkDetails } from '../../shared/linkDetails';
+import { LinkDetails, LinkResult } from '../../shared/linkDetails';
 
 export interface LinkObserver {
     onCreate(link: LinkDetails): void
@@ -16,7 +16,7 @@ export class LinkService {
 
     private observers: LinkObserver[] = [];
 
-    public create(details: LinkDetails): Promise<LinkDetails> {
+    public create(details: LinkDetails): Promise<LinkResult> {
         return Promise.resolve(this.$http.post<LinkDetails>('/create', details)
             .then((result: any) => {
                 console.log("Got a response", result);

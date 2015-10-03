@@ -1,6 +1,6 @@
 /// <reference path='../_all.ts' />
 
-import { LinkDetails } from '../../../shared/linkDetails';
+import { LinkResult } from '../../../shared/linkDetails';
 import * as moment from 'moment';
 
 export function successDirective(): angular.IDirective {
@@ -13,7 +13,11 @@ export function successDirective(): angular.IDirective {
         replace: true,
         controller: SuccessCtrl,
         controllerAs: 'ctrl',
-        bindToController: true
+        bindToController: true,
+        link: function(scope, element) {
+            console.log($(element), $(element).find('.js-copy'));
+            new ZeroClipboard($(element).find('.js-copy'));
+        }
     }
 }
 
@@ -26,15 +30,15 @@ export class SuccessCtrl {
     }
 
     // Scope properties
-    public link: LinkDetails;
+    public link: LinkResult;
     public dismiss: () => void;
 
-    public getLinkUrl(link: LinkDetails) {
-        return 'http://putit.at/' + link.slug;
+    public getLinkUrl() {
+        return 'http://putit.at/' + this.link.slug;
     }
 
-    public getFriendlyTime(time) {
-        return moment(time).fromNow();
+    public getFriendlyTime() {
+        return moment(this.link.expires).fromNow();
     }
 }
 

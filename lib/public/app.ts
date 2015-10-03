@@ -6,6 +6,7 @@
 //require('angular-material');
 //require('angular-aria');
 //require('angular-animate');
+//require('zeroclipboard');
 
 import { formDirective } from './components/form/formDirective';
 import { successDirective } from './components/success/successDirective';

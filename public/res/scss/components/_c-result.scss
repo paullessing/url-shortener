@@ -1,33 +1,94 @@
 .c-result {
-	width: 100%;
+	width: 600px;
+	margin: 0 auto;
+
+	@include display-flex;
+	@include flex-direction(column);
+	@include align-items(center);
 }
 
-// No longer exists
-.c-result__item {
+.c-result__header {
+	font-size: 20px;
+	color: white;
+	font-weight: $font-weight-bold;
+	font-family: $font-merriweather;
+	font-style: italic;
+
+	padding-left: 8px;
+}
+
+.c-result__row {
 	width: 100%;
-	margin-bottom: 20px;
+	max-width: 100%;
+	margin-bottom: 8px;
 
-	background-color: #fffbe8;
-	color: #222;
+	@include display-flex;
+	@include flex-direction(row);
+}
+
+.c-result__link {
+	max-width: 100%;
+	height: 50px;
 	@include box-shadow(2px 2px 2px rgba(0,0,0,0.2));
-	border-radius: 3px;
+	border: none;
+	outline: none;
+	background-color: white;
+	color: #222222;
+	cursor: text;
+	font-size: 17px;
+	@include flex-grow(1);
 
-	padding: 16px;
-	position: relative;
+	font-family: $font-roboto;
+	font-weight: $font-weight-normal;
 
-	&:last-child {
-		margin-bottom: 0;
+	border-radius: 3px 0 0 3px;
+
+	padding: 0 10px;
+}
+
+.c-result__copyButton {
+	height: 50px;
+	outline: none;
+	border: none;
+	width: 100px;
+	@include box-shadow(2px 2px 2px rgba(0,0,0,0.2));
+	// TODO this style should be a mixin
+	background-color: #d138e8;
+	color: white;
+	font-weight: $font-weight-bold;
+	font-family: $font-merriweather;
+	font-style: italic;
+	font-size: 20px;
+
+	border-radius: 0 3px 3px 0;
+}
+
+.c-result__sourceLink {
+	white-space: nowrap;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	margin-left: 8px;
+
+	font-size: 14px;
+
+	&,
+	&:active,
+	&:hover {
+		color: white;
 	}
-
-	&:after {
-		@extend .fa;
-		content: $fa-var-times;
-		color: #666;
-		font-size: 20px;
-		position: absolute;
-		top: 16px;
-		right: 16px;
+	&,
+	&:active {
+		text-decoration: none;
 	}
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+.c-result__expiry {
+	margin-left: 8px;
+	font-size: 14px;
 }
 
 .c-result__time {
@@ -41,6 +102,23 @@
 		left: 0;
 		right: 0;
 		bottom: 1px;
-		border-bottom: 1px dashed #666;
+		border-bottom: 1px dashed white;
 	}
+}
+
+.c-result__dismiss {
+	margin-top: 20px;
+	height: 50px;
+	outline: none;
+	border: none;
+	border-radius: 3px;
+	padding: 0 20px;
+	@include box-shadow(2px 2px 2px rgba(0,0,0,0.2));
+	// TODO this style should be a mixin
+	background-color: #E8D241; // TODO sort out colours
+	color: white;
+	font-weight: $font-weight-bold;
+	font-family: $font-merriweather;
+	font-style: italic;
+	font-size: 20px;
 }

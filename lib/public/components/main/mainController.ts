@@ -1,6 +1,6 @@
 /// <reference path='../_all.ts' />
 
-import { LinkDetails } from '../../../shared/linkDetails';
+import { LinkDetails, LinkResult } from '../../../shared/linkDetails';
 import { LinkService } from '../../util/linkService';
 
 export class MainCtrl {
@@ -21,10 +21,10 @@ export class MainCtrl {
         this.self = this;
     }
 
-    public lastCreatedLink: LinkDetails = null;
+    public lastCreatedLink: LinkResult = null;
     public self: MainCtrl;
 
-    public submit(linkDetails: LinkDetails): Promise<LinkDetails> {
+    public submit(linkDetails: LinkDetails): Promise<LinkResult> {
         return this.linkService.create(linkDetails).then(newLink => {
             this.$scope.$apply(() => {
                 this.lastCreatedLink = newLink;

@@ -1,0 +1,15 @@
+@mixin fill-parent($direction: both) {
+	$direction: if($direction == all, both, $direction);
+	@if (index((both, horizontal, vertical), $direction) == null) {
+		@warn('Direction "#{$direction}" is not a valid value for mixin fill-parent. Valid: both, horizontal, vertical');
+	}
+
+	@if ($direction == both or $direction == horizontal) {
+		left: 0;
+		right: 0;
+	}
+	@if ($direction == both or $direction == vertical) {
+		top: 0;
+		bottom: 0;
+	}
+}
