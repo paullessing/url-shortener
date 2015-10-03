@@ -1,5 +1,6 @@
 import mongoose = require('mongoose');
 import Promise = require('bluebird');
+import moment = require('moment');
 
 import { LinkDetails } from '../../lib/shared/linkDetails';
 import { Link, repository } from '../../lib/system/link';
@@ -114,15 +115,37 @@ describe('LinkRepository', function() {
                     });
                 });
         });
+        it('should not return the link when it has expired', function() {
+            var slug = 'slug';
+            var expiry = moment().subtract(10, 'minutes').toDate();
+            return createLink(slug, expiry)
+                .then(function() {
+                    return linkRepository.fetchBySlug(slug)
+                })
+                .then((link: Link) => {
+                    assert.isNull(link);
+                });
+        });
+        it('should return the link when it has expired but includeExpired is true', function() {
+            var slug = 'slug';
+            var expiry = moment().subtract(10, 'minutes').toDate();
+            return createLink(slug, expiry)
+                .then(function() {
+                    return linkRepository.fetchBySlug(slug, true)
+                })
+                .then((link: Link) => {
+                    assert.isNotNull(link);
+                });
+        });
     });
 
     // TODO create unit tests for generateNewSlug once we have moved the generator logic into a separate component
 
-    function createLink(slug: string): Promise<Link> {
+    function createLink(slug: string, expiry?: Date): Promise<Link> {
         return Promise.resolve(repository.create({
             url: 'foo',
             slug: slug,
-            expires: new Date(),
+            expires: expiry || moment().add(10, 'minutes').toDate(),
             adminId: 'a'
         }));
     }

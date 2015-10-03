@@ -52,9 +52,13 @@ export var save = function(link: LinkDetails): Promise<Link> {
     return Promise.resolve(repository.create(link));
 };
 
-export var fetchBySlug = function(slug: string): Promise<Link> {
+export var fetchBySlug = function(slug: string, includeExpired?: boolean): Promise<Link> {
     return new Promise<Link>((resolve: (link: Link) => void, reject: (err: Error) => void) => {
-        repository.where('slug', slug).findOne((err: Error, link: Link) => {
+        var query = { slug: slug };
+        if (!includeExpired) {
+            query['expires'] = { $gt: moment().toDate() };
+        }
+        repository.findOne(query, (err: Error, link: Link) => {
             if (err) {
                 reject(err);
             } else {
