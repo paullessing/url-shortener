@@ -1,6 +1,4 @@
-///<reference path='_all.ts' />
-
-import * as mongoose from 'mongoose';
+import mongoose = require('mongoose');
 import { LinkDetails } from '../shared/linkDetails';
 
 var linkSchema = new mongoose.Schema({

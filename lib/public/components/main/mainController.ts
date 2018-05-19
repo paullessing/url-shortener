@@ -1,5 +1,3 @@
-/// <reference path='../_all.ts' />
-
 import { LinkDetails, LinkResult } from '../../../shared/linkDetails';
 import { LinkService } from '../../util/linkService';
 

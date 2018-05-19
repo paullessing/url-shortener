@@ -1,12 +1,7 @@
-///<reference path='_all.ts' />
-
 import Promise = require("bluebird");
-import linkModel = require("./link");
 import moment = require("moment");
-import { LinkDetails } from '../shared/linkDetails';
-import { Link } from './link';
-import * as linkRepository from './linkRepository';
 import crypto = require('crypto');
+import * as linkRepository from './linkRepository';
 
 var invalidSlugs = [
     '404',

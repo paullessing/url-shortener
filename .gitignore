@@ -34,3 +34,4 @@ typings
 
 .sass-cache/*
 public/res/css/*.css
+yarn-error.log

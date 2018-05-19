@@ -1,5 +1,3 @@
-///<reference path='../../typings/tsd.d.ts' />
-
 import Promise = require('bluebird');
 import mongoose = require('mongoose');
 import chai = require('chai');

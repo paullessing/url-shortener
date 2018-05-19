@@ -1,15 +1,9 @@
-///<reference path='../../typings/tsd.d.ts' />
-
 import Promise = require('bluebird');
 import moment = require('moment');
-import Moment = moment.Moment;
-
-import linkModel = require("../../lib/system/link");
-import Link = linkModel.Link;
-import LinkDetails = require('../../lib/shared/linkDetails');
 
 import chai = require('chai');
 import sinon = require('sinon');
+import Moment = moment.Moment;
 
 var mockery = require('mockery');
 

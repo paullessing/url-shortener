@@ -1,7 +1,5 @@
-/// <reference path='../_all.ts' />
-
 import { LinkResult } from '../../../shared/linkDetails';
-import * as moment from 'moment';
+import moment = require('moment');
 
 export function successDirective(): angular.IDirective {
     return {

@@ -1,5 +1,3 @@
-///<reference path='../components/_all.ts' />
-
 import { LinkDetails, LinkResult } from '../../shared/linkDetails';
 
 export interface LinkObserver {
@@ -17,25 +15,26 @@ export class LinkService {
     private observers: LinkObserver[] = [];
 
     public create(details: LinkDetails): Promise<LinkResult> {
-        return Promise.resolve(this.$http.post<LinkDetails>('/create', details)
+        return Promise.resolve()
+            .then(() => this.$http.post<LinkResult>('/create', details))
             .then((result: any) => {
                 console.log("Got a response", result);
                 if (!result.data.success) {
                     console.log("No success!");
-                    return Promise.reject(result.error);
+                    return Promise.reject<LinkResult>(result.error);
                 }
-                var createdLink = <LinkDetails> result.data.link;
+                var createdLink = result.data.link;
                 console.log('Result', createdLink);
                 this.notifyObservers(createdLink);
                 return createdLink;
             }, httpErr => {
                 console.warn("Http Error: ", httpErr);
-                return Promise.reject("An error has occurred. Please try again.");
+                return Promise.reject<LinkResult>("An error has occurred. Please try again.");
             })
             .catch(err => {
                 console.error("Failed to retrieve LinkDetails", err);
-                return Promise.reject(err);
-            }));
+                return Promise.reject<LinkResult>(err);
+            });
     }
 
     public addObserver(observer: LinkObserver) {

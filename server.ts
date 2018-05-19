@@ -1,19 +1,16 @@
-///<reference path='typings/tsd.d.ts' />
-
 var port = 8081;
 
 // Instructions from https://scotch.io/tutorials/creating-a-single-page-todo-app-with-node-and-angular
 
 // set up ========================
 import express        = require('express');
-import mongoose       = require('mongoose');        // mongoose for mongodb
-import morgan         = require('morgan');          // log requests to the console (express4)
-import bodyParser     = require('body-parser');     // pull information from HTML POST (express4)
+import mongoose       = require('mongoose'); // mongoose for mongodb
+import morgan         = require('morgan'); // log requests to the console (express4)
+import bodyParser     = require('body-parser'); // pull information from HTML POST (express4)
 import methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 var app               = express();                  // create our app w/ express
 
-import { Link } from './lib/system/link';
-import { LinkDetails, LinkResult } from './lib/shared/linkDetails';
+import { LinkDetails } from './lib/shared/linkDetails';
 import * as linkService from './lib/system/linkService';
 
 mongoose.connect('mongodb://localhost:27017/putit_at');

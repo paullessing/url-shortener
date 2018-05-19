@@ -1,5 +1,3 @@
-/// <reference path='../_all.ts' />
-
 import { LinkDetails } from '../../../shared/linkDetails';
 
 export function formDirective(): angular.IDirective {

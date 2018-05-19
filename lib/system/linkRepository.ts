@@ -1,7 +1,4 @@
-///<reference path='_all.ts' />
-
 import Promise = require('bluebird');
-import linkModel = require("./link");
 import moment = require("moment");
 import { Link, repository } from './link';
 import { LinkDetails } from '../shared/linkDetails';
