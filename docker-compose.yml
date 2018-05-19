@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  image_upload:
+    container_name: image-upload
+    image: node:8
+    command: bash -c "yarn install && yarn run build && yarn run start"
+    expose:
+      - "8081"
+    ports:
+      - "8081:8081"
+    restart: always
+    working_dir: /srv
+    links:
+      - db
+    volumes:
+      - "./package.json:/srv/package.json"
+      - "./yarn.lock:/srv/yarn.lock"
+      - "./config:/srv/config"
+      - "./tsconfig.json:/srv/tsconfig.json"
+      - "./nodemon.json:/srv/nodemon.json"
+      - "./src:/srv/src"
+      - "./config/config.json:/config.json"
+    environment:
+      CONFIG_FILE: /config.json
+#    environment:
+#      - VIRTUAL_HOST=images.putit.at
+#      - VIRTUAL_NETWORK=nginx-proxy
+#      - VIRTUAL_PORT=3000
+#      - LETSENCRYPT_HOST=images.putit.at
+#      - LETSENCRYPT_EMAIL=lessing.paul@gmail.com
+
+  db:
+    image: mongo:3

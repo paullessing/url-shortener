@@ -9,11 +9,12 @@
     "build": "yarn build-bower && yarn build-css && yarn build-js",
     "build-bower": "bower install",
     "build-css": "node-sass public/res/scss/style.scss public/res/css/style.css",
-    "build-js": "tsc"
+    "build-js": "tsc",
+    "start": "node dist/server.js"
   },
   "dependencies": {
-    "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
+    "bower": "^1.8.4",
     "express": "^4.13.3",
     "method-override": "^2.3.5",
     "moment": "^2.10.6",
@@ -30,7 +31,7 @@
     "@types/moment": "^2.13.0",
     "@types/mongoose": "^5.0.14",
     "@types/zeroclipboard": "^2.0.31",
-    "browserify": "^11.0.1",
+    "browserify": "^16.2.2",
     "chai": "^3.2.0",
     "compass-mixins": "^0.12.10",
     "del": "^1.2.1",
@@ -38,6 +39,7 @@
     "mockery": "^1.4.0",
     "node-sass": "^4.9.0",
     "sinon": "^1.15.4",
+    "tsify": "^4.0.0",
     "typescript": "^2.8.3"
   }
 }

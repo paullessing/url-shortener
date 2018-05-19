@@ -1,4 +1,3 @@
-import Promise = require("bluebird");
 import moment = require("moment");
 import crypto = require('crypto');
 import * as linkRepository from './linkRepository';

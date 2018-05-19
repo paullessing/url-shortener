@@ -1,4 +1,3 @@
-import * as Promise from 'bluebird';
 import { Link } from './link';
 import { LinkDetails } from '../shared/linkDetails';
 import moment = require("moment");

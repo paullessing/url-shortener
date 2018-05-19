@@ -1,4 +1,3 @@
-import Promise = require('bluebird');
 import moment = require("moment");
 import { Link, repository } from './link';
 import { LinkDetails } from '../shared/linkDetails';
@@ -31,7 +30,7 @@ function attemptNewSlug(resolve: (slug: string) => void, reject: (error: Error) 
 }
 
 export var generateNewSlug = function(): Promise<string> {
-    return new Promise<string>(attemptNewSlug);
+    return new Promise<string>((resolve, reject) => attemptNewSlug(resolve, reject));
 };
 
 export var isSlugUnused = function(slug: string): Promise<boolean> {
