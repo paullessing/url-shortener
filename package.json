@@ -19,7 +19,8 @@
     "method-override": "^2.3.5",
     "moment": "^2.10.6",
     "mongoose": "^4.1.1",
-    "morgan": "^1.6.1"
+    "morgan": "^1.6.1",
+    "preact": "^8.2.7"
   },
   "devDependencies": {
     "@types/angular": "^1.4.4",
@@ -39,7 +40,10 @@
     "mockery": "^1.4.0",
     "node-sass": "^4.9.0",
     "sinon": "^1.15.4",
+    "ts-loader": "4",
     "tsify": "^4.0.0",
-    "typescript": "^2.8.3"
+    "typescript": "^2.8.3",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   }
 }
