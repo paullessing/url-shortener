@@ -1,4 +1,4 @@
-import * as React from 'preact';
+import * as React from 'react';
 import { LinkResult } from '../shared/linkDetails';
 import { LinkCreated } from './LinkCreated';
 import { LinkForm } from './LinkForm';
@@ -7,10 +7,10 @@ export interface State {
   lastCreatedLink: LinkResult | null;
 }
 
-export class Main extends React.Component<any, State> implements React.ComponentLifecycle<any, any> {
+export class Main extends React.Component<any, State> /* implements React.ComponentLifecycle<any, any> */ {
 
-  constructor() {
-    super();
+  constructor(props: any) {
+    super(props);
 
     this.state = {
       lastCreatedLink: null
@@ -20,11 +20,11 @@ export class Main extends React.Component<any, State> implements React.Component
     this.submit = this.submit.bind(this);
   }
 
-  public componentDidMount(): void {
-  }
-
-  public componentWillUnmount(): void {
-  }
+  // public componentDidMount(): void {
+  // }
+  //
+  // public componentWillUnmount(): void {
+  // }
 
   public dismiss(): void {
     this.setState({

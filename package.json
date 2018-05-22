@@ -20,7 +20,8 @@
     "moment": "^2.10.6",
     "mongoose": "^4.1.1",
     "morgan": "^1.6.1",
-    "preact": "^8.2.7"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   },
   "devDependencies": {
     "@types/angular": "^1.4.4",
@@ -31,7 +32,10 @@
     "@types/mocha": "^5.2.0",
     "@types/moment": "^2.13.0",
     "@types/mongoose": "^5.0.14",
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
     "@types/zeroclipboard": "^2.0.31",
+    "awesome-typescript-loader": "^5.0.0",
     "browserify": "^16.2.2",
     "chai": "^3.2.0",
     "compass-mixins": "^0.12.10",
@@ -40,6 +44,7 @@
     "mockery": "^1.4.0",
     "node-sass": "^4.9.0",
     "sinon": "^1.15.4",
+    "source-map-loader": "^0.2.3",
     "ts-loader": "4",
     "tsify": "^4.0.0",
     "typescript": "^2.8.3",

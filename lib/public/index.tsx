@@ -1,6 +1,8 @@
-import * as React from 'preact';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Main } from './Main';
 
-React.render(
+ReactDOM.render(
   <Main></Main>,
   document.getElementById('react') as Element
 );

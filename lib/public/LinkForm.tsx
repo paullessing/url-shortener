@@ -1,4 +1,5 @@
-import * as React from 'preact';
+import * as React from 'react';
+import { ChangeEvent } from 'react';
 
 export interface FormProps {
   submit(data: { url: string, slug: string, expiry: number }): void;
@@ -42,10 +43,12 @@ const EXPIRY_OPTIONS = [{
   name: '1 year'
 }];
 
-export class LinkForm extends React.Component<FormProps, FormState> implements React.ComponentLifecycle<any, any> {
+// new ZeroClipboard($(element).find('.js-copy')); TODO
 
-  constructor() {
-    super();
+export class LinkForm extends React.Component<FormProps, FormState> /* implements React.ComponentLifecycle<any, any> */ {
+
+  constructor(props: FormProps) {
+    super(props);
 
     this.state = EMPTY_FORM;
     this.updateUrl = this.updateUrl.bind(this);
@@ -54,17 +57,17 @@ export class LinkForm extends React.Component<FormProps, FormState> implements R
     this.submit = this.submit.bind(this);
   }
 
-  public updateUrl(event: Event): void {
+  public updateUrl(event: ChangeEvent<HTMLInputElement>): void {
     this.setState((state) => ({
       ...state,
-      url: (event.target as HTMLInputElement).value || ''
+      url: event.target.value || ''
     }));
   }
 
-  public updateSlug(event: Event): void {
+  public updateSlug(event: ChangeEvent<HTMLInputElement>): void {
     this.setState((state) => ({
       ...state,
-      slug: (event.target as HTMLInputElement) || ''
+      slug: event.target.value || ''
     }));
   }
 
@@ -80,28 +83,28 @@ export class LinkForm extends React.Component<FormProps, FormState> implements R
   };
 
   public render(): JSX.Element {
-    return <form onSubmit={this.submit} noValidate class="c-linkForm">
-      <div class="c-linkForm__row">
-        <input type="text" class="c-linkForm__link" value={this.state.url} onChange={this.updateUrl} placeholder="Paste your long URL here" />
-        <button type="submit" class="c-linkForm__submit">Create Link</button>
+    return <form onSubmit={this.submit} noValidate className="c-linkForm">
+      <div className="c-linkForm__row">
+        <input type="text" className="c-linkForm__link" value={this.state.url} onChange={this.updateUrl} placeholder="Paste your long URL here" />
+        <button type="submit" className="c-linkForm__submit">Create Link</button>
       </div>
-      <div class="c-linkForm__row">
-        <div class="c-linkForm__inputBlock">
-          <label class="c-linkForm__label" for="slug">
+      <div className="c-linkForm__row">
+        <div className="c-linkForm__inputBlock">
+          <label className="c-linkForm__label" htmlFor="slug">
             Slug (Optional)
           </label>
-          <input type="text" id="slug" value={this.state.slug} onChange={this.updateSlug} class="c-linkForm__slug" />
+          <input type="text" id="slug" value={this.state.slug} onChange={this.updateSlug} className="c-linkForm__slug" />
         </div>
-        <div class="c-linkForm__inputBlock">
-          <label class="c-linkForm__label">
+        <div className="c-linkForm__inputBlock">
+          <label className="c-linkForm__label">
             Expiry
           </label>
-          <select ng-model="ctrl.formData.expiresSeconds" class="c-linkForm__expiry">
+          <select className="c-linkForm__expiry">
             {EXPIRY_OPTIONS.map(({name, value}) => <option value={'' + value} onChange={this.updateExpiry(value)}>{name}</option>)}
           </select>
         </div>
       </div>
-      <pre><code>{this.state.url} - {this.state.slug} - {this.state.expiry}</code></pre> <!-- TODO This is debug code -->
+      <pre><code>{this.state.url} - {this.state.slug} - {this.state.expiry}</code></pre> { /* TODO This is debug code --> */ }
     </form>;
   }
 }
