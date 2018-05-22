@@ -11,12 +11,6 @@ interface FormState {
   expiry: number;
 }
 
-const EMPTY_FORM: FormState = {
-  url: '',
-  slug: '',
-  expiry: 0
-};
-
 const EXPIRY_OPTIONS = [{
   value: 600,
   name: '10 minutes'
@@ -42,6 +36,12 @@ const EXPIRY_OPTIONS = [{
   value: 86400 * 365,
   name: '1 year'
 }];
+
+const EMPTY_FORM: FormState = {
+  url: '',
+  slug: '',
+  expiry: 86400
+};
 
 // new ZeroClipboard($(element).find('.js-copy')); TODO
 
@@ -102,14 +102,14 @@ export class LinkForm extends React.Component<FormProps, FormState> /* implement
           <label className="c-linkForm__label">
             Expiry
           </label>
-          <select className="c-linkForm__expiry" onChange={this.updateExpiry}>
+          <select className="c-linkForm__expiry" onChange={this.updateExpiry} value={this.state.expiry}>
             {EXPIRY_OPTIONS.map(({name, value}) =>
               <option key={value} value={'' + value}>{name}</option>
             )}
           </select>
         </div>
       </div>
-      <pre><code>{this.state.url} - {this.state.slug} - {this.state.expiry}</code></pre> { /* TODO This is debug code --> */ }
+      <pre><code>{this.state.url} - {this.state.slug} - {this.state.expiry}</code></pre> { /* TODO This is debug code */ }
     </form>;
   }
 }
