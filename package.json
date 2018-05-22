@@ -10,6 +10,7 @@
     "build-bower": "bower install",
     "build-css": "node-sass public/res/scss/style.scss public/res/css/style.css",
     "build-js": "tsc",
+    "build-frontend": "webpack --mode development",
     "start": "node dist/server.js"
   },
   "dependencies": {

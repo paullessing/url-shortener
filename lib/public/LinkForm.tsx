@@ -58,23 +58,26 @@ export class LinkForm extends React.Component<FormProps, FormState> /* implement
   }
 
   public updateUrl(event: ChangeEvent<HTMLInputElement>): void {
+    const url = event.target.value || '';
     this.setState((state) => ({
       ...state,
-      url: event.target.value || ''
+      url
     }));
   }
 
   public updateSlug(event: ChangeEvent<HTMLInputElement>): void {
+    const slug = event.target.value || '';
     this.setState((state) => ({
       ...state,
-      slug: event.target.value || ''
+      slug
     }));
   }
 
-  public updateExpiry(expiry: number): () => void {
-    return () => this.setState((state) => ({
+  public updateExpiry(event: ChangeEvent<HTMLSelectElement>): void {
+    const expiry = Math.max(parseInt(event.target.value, 10), 0);
+    this.setState((state) => ({
       ...state,
-      expiry: Math.max(expiry, 0)
+      expiry
     }));
   }
 
@@ -99,8 +102,10 @@ export class LinkForm extends React.Component<FormProps, FormState> /* implement
           <label className="c-linkForm__label">
             Expiry
           </label>
-          <select className="c-linkForm__expiry">
-            {EXPIRY_OPTIONS.map(({name, value}) => <option value={'' + value} onChange={this.updateExpiry(value)}>{name}</option>)}
+          <select className="c-linkForm__expiry" onChange={this.updateExpiry}>
+            {EXPIRY_OPTIONS.map(({name, value}) =>
+              <option key={value} value={'' + value}>{name}</option>
+            )}
           </select>
         </div>
       </div>
